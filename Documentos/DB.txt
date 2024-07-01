@@ -1,0 +1,64 @@
+create table Peliculas (
+    idPelicula serial primary key,
+    Titulo varchar(255) not null,
+    Duracion int not null,
+    Genero varchar(100),
+    Clasificacion varchar(10)
+);
+
+create table Salas (
+    idSalas serial primary key,
+    Nombre varchar(255) not null,
+    Capacidad int not null
+);
+
+create table Filas (
+    idFilas serial primary key,
+    Numero int not null,
+    SalaID int,
+    foreign key (SalaID) references Salas(idSalas)
+);
+
+create table Puestos (
+    id serial primary key,
+    Numero int not null,
+    FilaID int,
+    foreign key (FilaID) references Filas(idFilas)
+);
+
+create table Funciones (
+    id serial primary key,
+    Fecha date not null,
+    Hora time not null,
+    PeliculaID int,
+    SalaID int,
+    foreign key (PeliculaID) references Peliculas(idPelicula),
+    foreign key (SalaID) references Salas(idSalas)
+);
+
+create table Clientes (
+    id serial primary key,
+    Nombre varchar(255) not null,
+    Apellido varchar(255) not null,
+    Email varchar(255) unique not null
+);
+
+create table Taquilleros (
+    id serial primary key,
+    Nombre varchar(255) not null,
+    Apellido varchar(255) not null,
+    Email varchar(255) unique not null
+);
+
+create table Boletas (
+    id serial primary key,
+    Precio DECIMAL(10, 2) not null,
+    FuncionID int,
+    PuestoID int,
+    ClienteID int,
+    TaquilleroID int,
+    foreign key (FuncionID) references Funciones(id),
+    foreign key (PuestoID) references Puestos(id),
+    foreign key (ClienteID) references Clientes(id),
+    foreign key (TaquilleroID) references Taquilleros(id)
+);
