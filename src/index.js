@@ -6,6 +6,8 @@ import filasRoute from './routes/filas.routes.js'
 import puestosRoute from './routes/puestos.routes.js'
 import funcionesRoute from './routes/funciones.routes.js'
 import clientesRoute from './routes/clientes.routes.js'
+import taquillerosRoute from './routes/taquilleros.routes.js'
+import boletosRoute from './routes/boletos.routes.js'
 
 const app = express()
 
@@ -16,6 +18,8 @@ app.use(filasRoute);
 app.use(puestosRoute);
 app.use(funcionesRoute);
 app.use(clientesRoute);
+app.use(taquillerosRoute);
+app.use(boletosRoute);
 
 app.listen(PORT)
 console.log('Server on port', PORT)
